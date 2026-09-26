@@ -5,8 +5,18 @@ with lib;
 let
   cfg = config.enyxma.installer;
 
-  # Installer betiğini paketle
-  enyxmaInstallPkg = pkgs.writeShellScriptBin "enyxma-install" (builtins.readFile ./enyxma-install.sh);
+  # Hedef sisteme aktarılacak modül ve kabuk şablonu
+  enyxmaTemplate = pkgs.runCommand "enyxma-template" { } ''
+    mkdir -p $out
+    cp -r ${../../modules} $out/modules
+    cp -r ${../../shell} $out/shell
+  '';
+
+  # Installer betiğini şablon yoluyla birlikte paketle
+  enyxmaInstallPkg = pkgs.writeShellScriptBin "enyxma-install" ''
+    export ENYXMA_TEMPLATE="${enyxmaTemplate}"
+    ${builtins.readFile ./enyxma-install.sh}
+  '';
 in
 {
   options.enyxma.installer = {

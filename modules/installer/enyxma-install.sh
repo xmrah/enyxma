@@ -261,7 +261,11 @@ mkdir -p /mnt/persist/etc/nixos
 
 # Mevcut repo şablonunu hedef sisteme kopyala
 REPO_ROOT=$(dirname "$(dirname "$(readlink -f "$0")")")
-if [ -d "$REPO_ROOT/shell" ]; then
+if [ -n "$ENYXMA_TEMPLATE" ] && [ -d "$ENYXMA_TEMPLATE" ]; then
+  info "Sistem şablonu yerel kurulum medyasından kopyalanıyor..."
+  cp -r "$ENYXMA_TEMPLATE"/* /mnt/persist/etc/nixos/
+  chmod -R u+w /mnt/persist/etc/nixos/
+elif [ -d "$REPO_ROOT/shell" ]; then
   cp -r "$REPO_ROOT"/* /mnt/persist/etc/nixos/ || true
 fi
 
