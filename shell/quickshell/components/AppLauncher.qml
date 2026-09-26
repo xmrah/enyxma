@@ -213,6 +213,7 @@ PanelWindow {
 
     // Dahili Uygulama Veritabanı
     readonly property var allApps: [
+        { name: "Sistem Kurulumu", desc: "enyxma canlı kurulum sihirbazı", icon: "🚀", exec: "kitty --title 'enyxma installer' enyxma-install" },
         { name: "Terminal", desc: "Kitty GPU hızlandırmalı uçbirim", icon: "💻", exec: "kitty" },
         { name: "Dosya Yöneticisi", desc: "Sistem dosyalarını tara", icon: "📁", exec: "thunar || dolphin" },
         { name: "Sistem Monitörü", desc: "btop donanım ve süreç izleyici", icon: "📊", exec: "kitty -e btop" },

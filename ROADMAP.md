@@ -35,9 +35,9 @@ Her görev bitince ilgili kutuyu işaretle ve bir commit at. Yeni bir ajan/model
 
 ## Faz 5 — Canlı ISO ve Prodüksiyon Kurulum Akışı
 
-- [ ] Yerel `nixpkgs` imaj motoru (`system.build.isoImage`) ile canlı ISO türetimini kur.
-- [ ] ISO açılışında 4-5 tema arasından seçim yapabilen, pro seviyede pürüzsüz kurulum akışını oluştur.
-- [ ] VM'e ve gerçek SSD'ye kurulumu uçtan uca test et.
+- [x] Yerel `nixpkgs` imaj motoru (`system.build.isoImage`) ile canlı ISO türetimini kur.
+- [x] ISO açılışında 4-5 tema arasından seçim yapabilen, pro seviyede pürüzsüz kurulum akışını oluştur.
+- [x] VM'e ve gerçek SSD'ye kurulumu uçtan uca test et.
 
 ## Faz 6 — Genişletme ve Belgelendirme
 

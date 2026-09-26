@@ -1,10 +1,11 @@
-{ config, lib, ... }:
+{ config, lib, options, ... }:
 
 with lib;
 
 let
   hwCfg = config.enyxma.hardware;
   facterCfg = hwCfg.facter;
+  hasFacter = options ? facter;
 in
 {
   options.enyxma.hardware.facter = {
@@ -21,7 +22,7 @@ in
     };
   };
 
-  config = mkIf (hwCfg.enable && facterCfg.enable && facterCfg.reportPath != null) {
+  config = optionalAttrs hasFacter (mkIf (hwCfg.enable && facterCfg.enable && facterCfg.reportPath != null) {
     facter.reportPath = facterCfg.reportPath;
-  };
+  });
 }

@@ -44,15 +44,23 @@
       impermanence = import ./modules/impermanence;
       hardware = import ./modules/hardware;
       security = import ./modules/security;
+      installer = import ./modules/installer;
       homeManager = (import ./shell { inherit (pkgs) lib; inherit pkgs; }).homeManagerModule;
     };
 
-    # Nixpak kütüphanesini sistem araçlarıyla dışa aktar
+    # Nixpak kütüphanesini dışa aktar
     lib = {
       nixpak = nixpak.lib.nixpak { inherit (pkgs) lib pkgs; };
     };
 
+    # Doğrudan derlenebilir paketler
+    packages.${system} = {
+      # Canlı ISO İmajı: `nix build .#iso`
+      iso = self.nixosConfigurations.iso.config.system.build.isoImage;
+    };
+
     nixosConfigurations = {
+      # 1. Kurulu Hedef Sistem Yapılandırması (SSD / VM)
       enyxma = nixpkgs.lib.nixosSystem {
         modules = [
           disko.nixosModules.disko
@@ -64,6 +72,7 @@
           self.nixosModules.impermanence
           self.nixosModules.hardware
           self.nixosModules.security
+          self.nixosModules.installer
           {
             nixpkgs.hostPlatform = system;
             system.stateVersion = "26.05";
@@ -114,6 +123,9 @@
               defaultTheme = "void-black";
             };
 
+            # Kurulum Aracı
+            enyxma.installer.enable = true;
+
             # VM Doğrulama ve Test Yapılandırması
             virtualisation.vmVariant = {
               virtualisation = {
@@ -122,6 +134,18 @@
               };
             };
           }
+        ];
+      };
+
+      # 2. Canlı Kurulum ISO Yapılandırması (Faz 5)
+      iso = nixpkgs.lib.nixosSystem {
+        modules = [
+          lanzaboote.nixosModules.lanzaboote
+          self.nixosModules.desktop
+          self.nixosModules.hardware
+          self.nixosModules.security
+          self.nixosModules.installer
+          ./hosts/iso
         ];
       };
     };
