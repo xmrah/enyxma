@@ -29,9 +29,9 @@ Her görev bitince ilgili kutuyu işaretle ve bir commit at. Yeni bir ajan/model
 
 ## Faz 4 — Gray-Hat Güvenlik Katmanı (`modules/security/`)
 
-- [ ] İzole güvenlik araçları modülünü kur (`modules/security/`).
-- [ ] `nixpak` ile kritik/güvensiz uygulamaların (tarayıcılar, exploit araçları) deklaratif sandbox entegrasyonu.
-- [ ] `lanzaboote` ile Secure Boot (UKI/sbctl) desteğini yapılandır.
+- [x] İzole güvenlik araçları modülü kuruldu (kategorize profiller: network, recon, forensics, crypto, web).
+- [x] `nixpak` ve Bubblewrap ile deklaratif sandbox (`enyxma-sandbox` tecrit kafesi) entegre edildi.
+- [x] `lanzaboote` ile Secure Boot (UKI/sbctl) desteği ve impermanence PKI kalıcılığı yapılandırıldı.
 
 ## Faz 5 — Canlı ISO ve Prodüksiyon Kurulum Akışı
 

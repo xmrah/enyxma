@@ -20,9 +20,19 @@
     nixos-hardware = {
       url = "github:NixOS/nixos-hardware";
     };
+
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixpak = {
+      url = "github:nixpak/nixpak";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, disko, impermanence, nixos-facter-modules, nixos-hardware, ... }@inputs:
+  outputs = { self, nixpkgs, disko, impermanence, nixos-facter-modules, nixos-hardware, lanzaboote, nixpak, ... }@inputs:
   let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
@@ -33,7 +43,13 @@
       disko = import ./modules/disko;
       impermanence = import ./modules/impermanence;
       hardware = import ./modules/hardware;
+      security = import ./modules/security;
       homeManager = (import ./shell { inherit (pkgs) lib; inherit pkgs; }).homeManagerModule;
+    };
+
+    # Nixpak kütüphanesini sistem araçlarıyla dışa aktar
+    lib = {
+      nixpak = nixpak.lib.nixpak { inherit (pkgs) lib pkgs; };
     };
 
     nixosConfigurations = {
@@ -42,32 +58,45 @@
           disko.nixosModules.disko
           impermanence.nixosModules.impermanence
           nixos-facter-modules.nixosModules.facter
+          lanzaboote.nixosModules.lanzaboote
           self.nixosModules.desktop
           self.nixosModules.disko
           self.nixosModules.impermanence
           self.nixosModules.hardware
+          self.nixosModules.security
           {
             nixpkgs.hostPlatform = system;
             system.stateVersion = "26.05";
 
+            # Gray-Hat Güvenlik ve İzolasyon Katmanı (Faz 4)
+            enyxma.security = {
+              enable = true;
+              tools = {
+                enable = true;
+                categories = [ "all" ];
+              };
+              sandbox.enable = true;
+              secureboot.enable = false; # VM için false, donanım kurulumunda true
+            };
+
             # Donanım ve GPU Uyumu (Faz 3)
             enyxma.hardware = {
               enable = true;
-              gpu.driver = "auto"; # Evrensel Mesa/RADV/Intel hızlandırması
+              gpu.driver = "auto";
             };
 
             # Disko & Impermanence Yapılandırması (Faz 2)
             enyxma.disko = {
               enable = true;
               device = "/dev/vda";
-              encrypted = false; # VM için şifresiz, prodüksiyon SSD için true
+              encrypted = false;
               tmpfsSize = "8G";
             };
 
             # Standart Operatör Kullanıcısı
             users.users.enyxma = {
               isNormalUser = true;
-              extraGroups = [ "wheel" "video" "audio" "networkmanager" ];
+              extraGroups = [ "wheel" "video" "audio" "networkmanager" "wireshark" ];
               description = "enyxma operator";
             };
 
