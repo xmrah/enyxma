@@ -41,5 +41,5 @@ Her görev bitince ilgili kutuyu işaretle ve bir commit at. Yeni bir ajan/model
 
 ## Faz 6 — Genişletme ve Belgelendirme
 
-- [ ] Yeni tema varyasyonu eklemeyi sağlayan deklaratif arayüzü belgele.
-- [ ] Kurulum, geliştirici ve güvenlik kullanım kılavuzlarını tamamla.
+- [x] Yeni tema varyasyonu eklemeyi sağlayan deklaratif arayüzü belgele.
+- [x] Kurulum, geliştirici ve güvenlik kullanım kılavuzlarını tamamla.
