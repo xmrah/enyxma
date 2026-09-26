@@ -12,9 +12,17 @@
     impermanence = {
       url = "github:nix-community/impermanence";
     };
+
+    nixos-facter-modules = {
+      url = "github:nix-community/nixos-facter-modules";
+    };
+
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware";
+    };
   };
 
-  outputs = { self, nixpkgs, disko, impermanence, ... }@inputs:
+  outputs = { self, nixpkgs, disko, impermanence, nixos-facter-modules, nixos-hardware, ... }@inputs:
   let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
@@ -24,6 +32,7 @@
       desktop = import ./modules/desktop;
       disko = import ./modules/disko;
       impermanence = import ./modules/impermanence;
+      hardware = import ./modules/hardware;
       homeManager = (import ./shell { inherit (pkgs) lib; inherit pkgs; }).homeManagerModule;
     };
 
@@ -32,12 +41,20 @@
         modules = [
           disko.nixosModules.disko
           impermanence.nixosModules.impermanence
+          nixos-facter-modules.nixosModules.facter
           self.nixosModules.desktop
           self.nixosModules.disko
           self.nixosModules.impermanence
+          self.nixosModules.hardware
           {
             nixpkgs.hostPlatform = system;
             system.stateVersion = "26.05";
+
+            # Donanım ve GPU Uyumu (Faz 3)
+            enyxma.hardware = {
+              enable = true;
+              gpu.driver = "auto"; # Evrensel Mesa/RADV/Intel hızlandırması
+            };
 
             # Disko & Impermanence Yapılandırması (Faz 2)
             enyxma.disko = {

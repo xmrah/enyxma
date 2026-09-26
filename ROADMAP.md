@@ -24,8 +24,8 @@ Her görev bitince ilgili kutuyu işaretle ve bir commit at. Yeni bir ajan/model
 
 ## Faz 3 — Otomatik Donanım Uyumu
 
-- [ ] `nixos-hardware` ve `nixos-facter` stratejilerini karşılaştırarak bir ADR yaz.
-- [ ] Cihaz bağımsız otomatik GPU (AMD/Intel/Nvidia) ve çevre birimi algılama/uyum modülünü kur.
+- [x] `nixos-hardware` ve `nixos-facter` stratejileri karşılaştırılarak ADR-0002 ve ADR-0006 yazıldı.
+- [x] Cihaz bağımsız otomatik GPU (Mesa/RADV/VA-API/Nvidia/PRIME) ve çevre birimi modülü kuruldu.
 
 ## Faz 4 — Gray-Hat Güvenlik Katmanı (`modules/security/`)
 
