@@ -88,5 +88,16 @@ in
         RestartSec = "1s";
       };
     };
+
+    # 8. Oturum ve Giriş Yöneticisi (greetd + tuigreet)
+    services.greetd = {
+      enable = true;
+      settings = {
+        default_session = {
+          command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd Hyprland";
+          user = "greeter";
+        };
+      };
+    };
   };
 }

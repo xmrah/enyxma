@@ -57,6 +57,17 @@
     packages.${system} = {
       # Canlı ISO İmajı: `nix build .#iso`
       iso = self.nixosConfigurations.iso.config.system.build.isoImage;
+      # VM Çıktısı: `nix build .#vm`
+      vm = self.nixosConfigurations.enyxma.config.system.build.vm;
+    };
+
+    apps.${system} = {
+      # Doğrudan VM çalıştırma: `nix run .#vm`
+      vm = {
+        type = "app";
+        program = "${self.nixosConfigurations.enyxma.config.system.build.vm}/bin/run-enyxma-vm";
+      };
+      default = self.apps.${system}.vm;
     };
 
     nixosConfigurations = {
@@ -131,6 +142,16 @@
               virtualisation = {
                 memorySize = 4096;
                 cores = 4;
+                qemu.options = [
+                  "-vga none"
+                  "-device virtio-gpu-pci"
+                ];
+              };
+              users.users.enyxma.initialHashedPassword = "";
+              security.sudo.wheelNeedsPassword = false;
+              services.greetd.settings.initial_session = {
+                command = "Hyprland";
+                user = "enyxma";
               };
             };
           }

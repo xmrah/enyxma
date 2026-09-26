@@ -49,6 +49,12 @@ with lib;
   };
   security.sudo.wheelNeedsPassword = false;
 
+  # Canlı Oturum Otomatik Açılış (Doğrudan Hyprland)
+  services.greetd.settings.initial_session = {
+    command = "Hyprland";
+    user = "nixos";
+  };
+
   # Ağ Yönetimi (Live Wi-Fi ve Ethernet)
   networking.networkmanager.enable = true;
   networking.wireless.enable = mkForce false;

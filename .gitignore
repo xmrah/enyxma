@@ -1,0 +1,8 @@
+# Nix derleme çıktıları
+result
+result-*
+
+# Sanal makine test diskleri
+.vm-test/
+*.qcow2
+*.iso
