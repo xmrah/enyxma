@@ -65,7 +65,7 @@
       # Doğrudan VM çalıştırma: `nix run .#vm`
       vm = {
         type = "app";
-        program = "${self.nixosConfigurations.enyxma.config.system.build.vm}/bin/run-enyxma-vm";
+        program = "${self.nixosConfigurations.enyxma.config.system.build.vm}/bin/run-nixos-vm";
       };
       default = self.apps.${system}.vm;
     };

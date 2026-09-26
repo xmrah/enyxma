@@ -151,12 +151,8 @@ QtObject {
 
     // Quickshell IPC İşleyicisi
     // Harici çağrı: quickshell ipc call theme setTheme "cyber-matrix"
-    IpcHandler {
+    property IpcHandler ipc: IpcHandler {
         target: "theme"
-
-        onMessage: (msg) => {
-            root.applyTheme(msg.trim());
-        }
 
         function setTheme(name: string): void {
             root.applyTheme(name);

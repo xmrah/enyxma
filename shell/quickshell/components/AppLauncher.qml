@@ -11,7 +11,12 @@ PanelWindow {
     id: launcherWindow
 
     // Ekranı kaplayan yarı saydam arayüz
-    anchors.fill: parent
+    anchors {
+        top: true
+        bottom: true
+        left: true
+        right: true
+    }
     color: "transparent"
     visible: false
 

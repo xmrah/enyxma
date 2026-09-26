@@ -10,7 +10,7 @@ hl.monitor({
     scale    = "auto",
 })
 
--- Girdi Yapılandırması
+-- Girdi ve Pencere Düzeni Yapılandırması
 hl.config({
     input = {
         kb_layout  = "us,tr",
@@ -23,12 +23,7 @@ hl.config({
         sensitivity = 0,
     },
 
-    gestures = {
-        workspace_swipe = true,
-    },
-
     dwindle = {
-        pseudotile     = true,
         preserve_split = true,
     },
 
@@ -40,6 +35,5 @@ hl.config({
         disable_hyprland_logo    = true,
         disable_splash_rendering = true,
         force_default_wallpaper  = 0,
-        vfr                      = true,
     },
 })
