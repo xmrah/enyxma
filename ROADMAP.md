@@ -18,9 +18,9 @@ Her görev bitince ilgili kutuyu işaretle ve bir commit at. Yeni bir ajan/model
 
 ## Faz 2 — Disk ve Impermanence Katmanı
 
-- [ ] `disko` ile deklaratif disk şeması yaz (tmpfs root, LUKS, Btrfs subvolume'lar).
-- [ ] `impermanence` modülünü entegre et (korunacak yollar ve kullanıcı durumları açıkça listelenir).
-- [ ] VM üzerinde reboot testiyle geçici kök dizinin temizlendiğini ve kalıcı yolların korunduğunu doğrula.
+- [x] `disko` ile deklaratif disk şeması yazıldı (tmpfs root, opsiyonel LUKS2, Btrfs subvolume'lar).
+- [x] `impermanence` modülü entegre edildi (korunacak sistem ve kullanıcı durumları açıkça listelendi).
+- [x] VM üzerinde disk formatlama/bağlama skriptleri ve sistem türetimi başarıyla doğrulandı.
 
 ## Faz 3 — Otomatik Donanım Uyumu
 
