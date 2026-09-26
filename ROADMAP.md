@@ -11,10 +11,10 @@ Her görev bitince ilgili kutuyu işaretle ve bir commit at. Yeni bir ajan/model
 
 ## Faz 1 — Sıfırdan Masaüstü ve Yekpare Tema Ekosistemi (`shell/`)
 
-- [ ] Sıfırdan modüler Pure Lua Hyprland (0.55+) mimarisini kur (`core/`, `wm/`, `ui/`).
-- [ ] Quickshell (QtQuick/QML) tabanlı egemen masaüstü kabuğunu inşa et (`TopBar`, `AppLauncher`, `ControlCenter`, `OSD`).
-- [ ] 4-5 seçkin temalı native tema motorunu (`Theme.qml` & IPC) kur (Stylix olmadan, anlık senkronizasyon).
-- [ ] `nixos-rebuild build-vm` veya doğrudan VM testi ile görsel ve fonksiyonel bütünlüğü doğrula.
+- [x] Sıfırdan modüler Pure Lua Hyprland (0.55+) mimarisini kur (`core/`, `wm/`, `ui/`).
+- [x] Quickshell (QtQuick/QML) tabanlı egemen masaüstü kabuğunu inşa et (`TopBar`, `AppLauncher`, `ControlCenter`, `OSD`).
+- [x] 4-5 seçkin temalı native tema motorunu (`Theme.qml` & IPC) kur (Stylix olmadan, anlık senkronizasyon).
+- [x] `nixos-rebuild build-vm` veya doğrudan VM testi ile görsel ve fonksiyonel bütünlüğü doğrula.
 
 ## Faz 2 — Disk ve Impermanence Katmanı
 
